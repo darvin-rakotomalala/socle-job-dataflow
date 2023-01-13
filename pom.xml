@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.7</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.poc</groupId>
+    <artifactId>socle-job-dataflow</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>socle-job-dataflow</name>
+    <description>PoC project for Spring Boot</description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+        <java.version>11</java.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <org.apache.beam.version>2.43.0</org.apache.beam.version>
+        <solace-beam.version>1.2.0</solace-beam.version>
+
+        <custom.scm.connection>scm:git:URL-GIT</custom.scm.connection> <!-- DO NOT CHANGE !!!!! -->
+        <custom.scm.developerConnection>null</custom.scm.developerConnection> <!-- DO NOT CHANGE !!!!! -->
+        <custom.scm.url>null</custom.scm.url> <!-- DO NOT CHANGE !!!!! -->
+        <nexus.url>null</nexus.url> <!-- DO NOT CHANGE !!!!! -->
+        <nexus.repository.url>null</nexus.repository.url> <!-- DO NOT CHANGE !!!!! -->
+        <nexus.repository.id>null</nexus.repository.id> <!-- DO NOT CHANGE !!!!! -->
+    </properties>
+    <!-- MAVEN COMMAND TO RELEASE -->
+    <scm>
+        <connection>${custom.scm.connection}</connection>
+        <developerConnection>${custom.scm.connection}</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>ossrh.snapshots</id>
+            <name>Sonatype OSS Repository Hosting</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>${nexus.repository.id}</id>
+            <url>${nexus.repository.url}</url>
+        </snapshotRepository>
+        <repository>
+            <id>${nexus.repository.id}</id>
+            <url>${nexus.repository.url}</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.beam</groupId>
+            <artifactId>beam-sdks-java-core</artifactId>
+            <version>${org.apache.beam.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.beam</groupId>
+            <artifactId>beam-runners-direct-java</artifactId>
+            <version>${org.apache.beam.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.beam</groupId>
+            <artifactId>beam-runners-google-cloud-dataflow-java</artifactId>
+            <version>${org.apache.beam.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220924</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-secretmanager</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                        <mainClass>${main.class}</mainClass>
+                        <finalName>mainclass</finalName>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>1.4.1</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-java</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireJavaVersion>
+                                        <version>11</version>
+                                    </requireJavaVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
