@@ -2,7 +2,7 @@
 Dans ce repo un projet socle de job Dataflow qui utilise le concept de programmation Apache Beam.
 
 ### Dataflow
--- 
+--- 
 Un traitement des données par flux et par lot sans serveur, à la fois rapide, unifié et économique.
 - Un service de traitement des données entièrement géré
 - Gestion et provisionnement automatisés des ressources de traitement
