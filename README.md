@@ -1,5 +1,5 @@
 ## Projet socle job Dataflow
-Dans ce repo un projet socle de job Dataflow qui utilise le concept de programmation Apache Beam.
+Dans ce repo un projet socle job Dataflow qui utilise le concept de programmation Apache Beam.
 
 ### Dataflow
 --- 
