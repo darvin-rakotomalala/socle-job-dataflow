@@ -22,6 +22,7 @@ Un traitement des données par flux et par lot sans serveur, à la fois rapide, 
 2. Compiler le projet : mvn compile exec:java -Dexec.mainClass=com.poc.MainApplication -Dexec.args="--runner=DataflowRunner --region= --zone= --project= --stagingLocation= --templateLocation= --gcpTempLocation=" 
 3. Activer le SA google cloud dataflow
 4. Lancer le job : gcloud dataflow jobs run df-socle-ingest-id --disable-public-ips --region= --worker-zone= --project= --staging-location= --gcs-location=  --network= + TOUS les paramètres utilisés par le job
+5. On peut faire tous cela dans un CI/CD GitLab ou Jenkins
 
 ### Ressources pour apprendre Dataflow
 ---
